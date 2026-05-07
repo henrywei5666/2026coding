@@ -1,0 +1,15 @@
+# week11_5.py 學習計畫 Binary Tree - BFS 第1題
+# LeetCode 199. Binary Tree Right Side View
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        ans = []
+        def helper(root, level): # 第幾層樓
+            if root == None: return # 沒有東西,就不要再「函式呼叫函式」
+            if len(ans) <= level: # 如果格子不夠
+                ans.append( root.val ) # 就 append() 再多一格
+            else: # 如果格子有
+                ans[level] = root.val # 就直接改「那一格」
+            helper(root.left, level+1) # 函式呼叫函式
+            helper(root.right, level+1) # 函式呼叫函式
+        helper(root, 0)
+        return ans
